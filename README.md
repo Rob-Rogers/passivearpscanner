@@ -8,7 +8,7 @@ Features
     DNS Lookup: Optionally resolves IP addresses to DNS names for easier identification of network devices.
     Timestamps: Records first and last seen timestamps for each unique ARP response.
     Summary Logging: Periodically logs a summary of all ARP packets observed.
-    Flexible Output: Supports logging to a file or standard output.
+    Flexible Output: Supports logging to a file or standard output. Output is in JSON format.
 
 Dependencies
 
