@@ -1,14 +1,18 @@
 Passive ARP Scanner
 
 The Passive ARP Scanner is a network tool designed to monitor and log ARP (Address Resolution Protocol) traffic on a network interface without sending any packets itself. It captures live ARP packets, identifies devices on the local network, and maintains a detailed log of observed IP and MAC addresses, including timestamps, count of appearances, associated organizations (via OUI lookup), and DNS names if available.
-Features
 
+This should be used in promiscious mode, but also works on wifi and non-promiscious interfaces with reduced effectiveness only detecting devices talking to your machine without it.
+Alterantively to get the most ARP traffic passively you should span/mirror your switch port from your switch to an interface dedicated to just tracking this.
+
+Features. 
     Passive Listening: Captures ARP packets without generating network traffic.
     Organization Identification: Utilizes OUI data to identify the manufacturer or organization associated with a MAC address.
     DNS Lookup: Optionally resolves IP addresses to DNS names for easier identification of network devices.
     Timestamps: Records first and last seen timestamps for each unique ARP response.
     Summary Logging: Periodically logs a summary of all ARP packets observed.
     Flexible Output: Supports logging to a file or standard output. Output is in JSON format.
+
 
 Dependencies
 
