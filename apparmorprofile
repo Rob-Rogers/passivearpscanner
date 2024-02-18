@@ -1,0 +1,47 @@
+#Sample unfinished apparmor profile. Will impliment and fully test tonight. Ensures whitelisted only behavior of the program in the event it is exploited.
+
+#include <tunables/global>
+
+profile CyberSupervisorARPScanner /path/to/CyberSupervisorARPScanner {
+  #include <abstractions/base>
+  #include <abstractions/nameservice>
+
+  # Allow reading of necessary system files for network and DNS
+  /etc/nsswitch.conf r,
+  /etc/resolv.conf r,
+  /etc/host.conf r,
+  /etc/hosts r,
+  /etc/ld.so.cache r,
+  /etc/ld.so.preload r,
+  /etc/ld.so.conf r,
+  /etc/ld.so.conf.d/* r,
+  /lib/** mr,
+  /usr/lib/** mr,
+  /etc/timezone r,
+  /etc/localtime r,
+
+  # Permit reading and writing to the OUI file location
+  /usr/share/ieee-data/oui.txt r,
+
+  # Allow writing to log files or output files, assuming they are in /var/log or specified directory
+  # Note: You need to adjust these paths based on where the output file is located or written to
+  /var/log/CyberSupervisorARPScanner/*.log rw,
+  /path/to/output/directory/** rw,
+
+  # Allow network operations
+  network raw,
+
+  # Allow managing threads
+  @{PROC}/@{pid}/task/ r,
+  @{PROC}/@{pid}/attr/current rw,
+
+  # Allow basic system operations like time
+  @{PROC}/sys/kernel/hostname r,
+  @{PROC}/uptime r,
+  @{PROC}/@{pid}/stat r,
+  @{PROC}/@{pid}/cmdline r,
+  @{PROC}/@{pid}/oom_score_adj w,
+
+  # Deny everything else by default
+  deny /*** wl,
+}
